@@ -1,0 +1,275 @@
+# XPharsentials
+options:
+	pf: &c&lXPhar &4»
+	pf2: &c&lXPhar &4>>
+	noperm: &c&lXPhar &c» &cYou don't have permission to execute this command.
+	ver: &aVersion 1.0
+# XPharsentials >> Made by Alphar
+# XPharsentials >> 28/03/2020
+command /xphar [<text>]:
+	trigger:
+		send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.0."
+command /gmc:
+	permission: gmc.use
+	permission message: {@noperm}
+	description: Set your gamemode to creative.
+	trigger:
+		set the player's gamemode to creative
+		send "{@pf} &8Gamemode set to Creative."
+command /gms:
+	permission: gms.use
+	permission message: {@noperm}
+	description: Set your gamemode to survival.
+	trigger:
+		set the player's gamemode to survival
+		send "{@pf} &8Gamemode set to Survival."
+command /tp <player>:
+	permission: tp.use
+	permission message: {@noperm}
+	description: Tp to someone.
+	trigger:
+		teleport player to arg 1
+		send "{@pf} &8TP'ed to %arg 1%"
+command /tphere <player>:
+	permission: tphere.use
+	permission message: {@noperm}
+	description: Tp someone to you.
+	trigger:
+		teleport arg-1 to player
+		send "{@pf} &8TP'ed %arg 1% &8to you."
+		send "{@pf} &8%player% TP'ed you to him." to arg 1
+command /pl [<text>]:
+	trigger:
+		send "&cHaha you thought :) - Disabled by XPharsentials"
+command /plugins [<text>]:
+	trigger:
+		send "&cHaha you thought :) - Disabled by XPharsentials"
+command /bukkit:pl [<text>]:
+	trigger:
+		send "&cHaha you thought :) - Disabled by XPharsentials"
+command /bukkit:plugins [<text>]:
+	trigger:
+		send "&cHaha you thought :) - Disabled by XPharsentials"
+command /fly [<text>]:
+	permission: fly.use
+	permission message: {@noperm}
+	trigger:
+		if player's flight mode is false:
+			set player's flight mode to true
+			send "{@pf} &8You can now fly."
+			stop
+		if player's flight mode is true:
+			set player's flight mode to false
+			send "{@pf} &8You cannot fly now :("
+			stop
+# ---> may need to add stop ^^ not sure.
+command /ping [<text>]:
+	trigger:
+		send "&5ITS OVER 9 THOUSAND!!!"
+#command /prefix [<text>]:
+#	trigger:
+#	description: See whats your prefix
+#		send "{@pf} %player's prefix%"
+# Disabled. Recommendation: Only use it when you are using essentials chat.
+#command /nick <text>:
+#	permission: nick.use
+#	permission message: {@noperm}
+#	trigger:
+#		Set the player's display name to "**%arg 1%"
+#		send "{@pf} &8Nickname changed."
+#command /unnick:
+#	permission: nick.use
+#	permission message: {@noperm}
+#	trigger:
+#		Set the player's display name "%player%""
+#		send "{@pf} &8Disabled your Nickname."
+command /heal:
+	permission: heal.use
+	permission message: {@noperm}
+	trigger:
+		heal the player
+		send "{@pf} &8You have been healed."
+command /repair:
+	permission: repair.use
+	permission message: {@noperm}
+	trigger:
+		repair tool of player
+		send "{@pf} &8Tool Repaired."
+command /abuse [<text>]:
+	permission: abuse.use
+	permission message: {@noperm}
+	trigger:
+		enchant the player's tool with sharpness 1000
+		send "{@pf} &8Enchanted tool with sharpness 1000. Try not to get banned."
+#command /disenchant [<text>]:
+#	permission: disenchant.use
+#	permission message: {@noperm}
+#	trigger:
+#	    disenchant the player's tool # this is somehow not working
+#	    send "{@pf} Removed Tool's enchants" # this is somehow not working
+# Moderation Commands, Not too good.
+command /kick [<offline player>] [<text>]:
+    permission: kick.use
+    permission message: {@noperm}
+    description: Kick someone from the Server.
+    trigger:
+        if arg 1 is not set:
+            send "&cYou must select a player to kick."
+        if arg 1 is set: 
+            if arg 2 is not set:
+                arg 1 is online
+                send ""
+                kick arg 1 due to "You've ben kicked from the server"
+                stop 
+                arg 1 is not online 
+                send "&cThis player is not online."
+                stop
+
+            if arg 2 is set:
+                send ""
+                kick arg 1 due to "You've been kicked for %arg 2%" 
+                stop 
+command /ban [<offline player>] [<text>]:
+    permission: ban.use
+    permission message: {@noperm}
+    description: Ban Someone from the Server.
+    trigger:
+        if arg 1 is not set:
+            send "&cYou must select a player to ban."
+        if arg 1 is set:
+            if arg 2 is not set:
+                send ""
+                ban arg 1 due to "&cYou've been banned from the server"
+                stop
+                arg 1 is not online
+                send "&cThis player is not online." 
+
+            if arg 2 is set:
+                send ""
+                kick arg 1 due to "You've been banned for %arg 2%" 
+                stop
+# Chat Feelings?
+command /hug <player>:
+	description: Hug a Player :3
+	trigger:
+		if arg 1 is not set:
+			send "&cYou must choose a player to hug."
+		if arg 1 is set:
+			send "&dYou gave &5&o%arg 1% &da warn hug :3" to player 
+			send "&5&o%player% &djust gave you a warn hug ❤" to arg 1
+# Back to XPhar
+command /smite [<player>]:
+	permission: smite.use
+	permission message: {@noperm}
+	trigger:
+		if arg 1 is not set:
+			send "{@pf} &8Smited!"
+			strike lightning at the player
+		if arg 1 is set:
+			send "{@pf} &8Smited!"
+			strike lightning at arg 1
+# Broadcasting Commands
+command /broadcast [<text>]:
+	permission: bc.use
+	permission message: &cYou do not have permission to execute this command
+	description: Broadcast your Message!
+	trigger:
+		if arg 1 is not set:
+			send "{@pf} &7&oYou must say a message to broadcast!"
+		if arg 1 is set:
+			broadcast "&l"
+			broadcast "&l"
+			broadcast "            &b» &3&l%arg 1% &b«"
+			broadcast "&l"
+			broadcast "&l"
+command /bc [<text>]:
+	permission: bc.use
+	permission message: &cYou do not have permission to execute this command
+	description: Broadcast your Message!
+	trigger:
+		if arg 1 is not set:
+			send "{@pf} &8&oYou must say a message to broadcast!"
+		if arg 1 is set:
+			broadcast "&l"
+			broadcast "&l"
+			broadcast "            &b» &3&l%arg 1% &b«"
+			broadcast "&l"
+			broadcast "&l"
+command /alert [<text>]:
+	permission: bc.use
+	permission message: &cYou do not have permission to execute this command
+	description: Broadcast your Message!
+	trigger:
+		if arg 1 is not set:
+			send "{@pf} &8&oYou must say a message to broadcast!"
+		if arg 1 is set:
+			broadcast "&l"
+			broadcast "&l"
+			broadcast "            &b» &3&l%arg 1% &b«"
+			broadcast "&l"
+			broadcast "&l"
+# Help command
+command /help [<text>]:
+	permission: xphar.help
+	permission message: {@noperm}
+	description: A list of XPhar's Command's.
+	trigger:
+		if arg 1 is not set:
+			send "&7&m-------------&r&8[&c&lXPhar&8]&7&m-------------"
+			send "&7/gmc = Set your Gamemode to Creative."
+			send "&7/gms = Set your Gamemode to Survival."
+			send "&7/tp = Tp to a Player."
+			send "&7/tphere = Tp a player to you."
+			send "&7&m-------------&r&8[&cPage1&8]&7&m-------------"
+		if arg 1 is set:
+			if arg 1 is "2":
+				send "&7&m-------------&r&8[&c&lXPhar&8]&7&m-------------"
+				send "&7/fly = Set your Flymode to ON/OFF."
+				send "&7/ping = Just a Joke Command."
+				send "&7/heal = Heal yourself."
+				send "&7/abuse = Enchant the holding item with Sharp 1000"
+				send "&7&m-------------&r&8[&cPage2&8]&7&m-------------"
+			if arg 1 is "3":
+				send "&7&m-------------&r&8[&c&lXPhar&8]&7&m-------------"
+				send "&7/broadcast = Broadcast your Message."
+				send "&7/bc = Broadcast your Message."
+				send "&7/alert = Broadcast your Message."
+				send "&7/smite = Smite yourself or the player you want."
+				send "&7&m-------------&r&8[&cPage3&8]&7&m-------------"
+			if arg 1 is "4":
+				send "&7&m-------------&r&8[&c&lXPhar&8]&7&m-------------"
+				send "&7/mutechat = Mute the Chat."
+				send "&7/clearchat = Clear the Chat."
+				send "&7/cc = Clear the Chat."
+				send "&7/mc = Mute the Chat."
+				send "&7&m-------------&r&8[&cPage4&8]&7&m-------------"
+command /mutechat:
+    permission: chat.mute
+    permission message: {@noperm}
+    trigger:
+        if {Globalchat} is not set:
+            set {Globalchat} to true
+            broadcast "&cThe Chat was muted by &c&o%player%"
+            stop trigger
+
+        if {Globalchat} is set:
+            clear {Globalchat}
+            broadcast "&aThe Chat was unmuted by &a&o%player%"
+
+on chat:
+    if {Globalchat} is true:
+        if player has permission "chat.mute.bypass":
+            stop trigger
+        else:
+            cancel event
+            send "&cChat is currently muted."
+command /clearchat:
+    aliases: /cc
+    permission: chat.clear
+    permission message: {@noperm}
+    trigger:
+        loop 300 times:
+            broadcast ""
+        wait 1 tick
+        broadcast "&aThe chat has been cleared by &2%player%"
+        stop
