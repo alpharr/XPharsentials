@@ -287,7 +287,6 @@ command /help [<text>]:
 command /mutechat:
     permission: chat.mute
     permission message: {@noperm}
-	aliases: /mc
     trigger:
         if {Globalchat} is not set:
             set {Globalchat} to true
@@ -315,3 +314,41 @@ command /clearchat:
         wait 1 tick
         broadcast "&bThe chat has been cleared by &9%player%"
         stop
+command /rules [<text>]:
+	trigger:
+		send "&7&m---------------------------------"
+		send "            &b&lRULES"
+		send "&71&8) &7&oThis is a /rules template!"
+		send "&72&8) &7&oThis is a /rules template!"
+		send "&73&8) &7&oThis is a /rules template!"
+		send "&74&8) &7&oThis is a /rules template!"
+		send "&75&8) &7&oThis is a /rules template!"
+		send "&76&8) &7&oThis is a /rules template!"
+		send "&77&8) &7&oThis is a /rules template!"
+		send "&78&8) &7&oThis is a /rules template!"
+		send "&7&m---------------------------------"
+command /mc:
+    permission: chat.mute
+    permission message: {@noperm}
+    trigger:
+        if {Globalchat} is not set:
+            set {Globalchat} to true
+            broadcast "&cThe Chat was muted by &c&o%player%"
+            stop trigger
+
+        if {Globalchat} is set:
+            clear {Globalchat}
+            broadcast "&aThe Chat was unmuted by &a&o%player%"
+
+on chat:
+    if {Globalchat} is true:
+        if player has permission "chat.mute.bypass":
+            stop trigger
+        else:
+            cancel event
+            send "&cChat is currently muted."
+command /online [<text>]:
+	permission: online.see
+	permission message: &cYou aren't allowed to execute this command.
+	trigger:
+		send "&aThere are %number of all players% players online!"
