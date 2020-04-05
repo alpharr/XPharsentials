@@ -8,7 +8,25 @@ options:
 # XPharsentials >> 28/03/2020
 command /xphar [<text>]:
 	trigger:
-		send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.0."
+		if arg 1 is not set:
+			send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.1"
+		if arg 1 is set:
+			if arg 1 is "help":
+				send "&7&oOpening Help Page."
+				make player execute "/help"
+			if arg 1 is "when":
+				send "{@pf} &7&oLooks like you found the Secret huh."
+				send "{@pf} &7&oWell, the next release is coming soon enough."
+				send "{@pf} &7&oJk, Its gonna prob release in dd/mm/yy. (UNDEFINIED)"
+			if arg 1 is "flex":
+				broadcast "&9%player% &bjust FLEXED!"
+			if arg 1 is "sniff":
+				broadcast "&5%player% &dsniffed. uwu"
+			if arg 1 is "renegade":
+				broadcast "&4%player% &cis doing the RENEGADE!"
+				broadcast "&cSuch a great dancer!"
+			if arg 1 is "oof":
+				broadcast "&e%player% &ejust OOF'ed!"
 command /gmc:
 	permission: gmc.use
 	permission message: {@noperm}
@@ -83,12 +101,16 @@ command /ping [<text>]:
 #	trigger:
 #		Set the player's display name "%player%""
 #		send "{@pf} &8Disabled your Nickname."
-command /heal:
+command /heal [<player>]:
 	permission: heal.use
 	permission message: {@noperm}
 	trigger:
-		heal the player
-		send "{@pf} &8You have been healed."
+		if arg 1 is not set:
+			heal the player
+			send "{@pf} &8You have been healed."
+		if arg 1 is set:
+			heal arg 1
+			send "{@pf} &8Healed %arg 1%."
 command /repair:
 	permission: repair.use
 	permission message: {@noperm}
@@ -157,6 +179,18 @@ command /hug <player>:
 		if arg 1 is set:
 			send "&dYou gave &5&o%arg 1% &da warn hug :3" to player 
 			send "&5&o%player% &djust gave you a warn hug ❤" to arg 1
+command /dab [<player>]:
+	description: DAB.
+	trigger:
+		if arg 1 is not set:
+			broadcast "&9%player% &bDABBED! &b&owow so epic."
+		if arg 1 is set:
+			broadcast "&9%player% &bDABBED! &bon &9%arg 1%&b."
+command /bruh [<text>]:
+	description: bruh moment.
+	trigger:
+		broadcast "&e%player% &esaid bruh."
+		broadcast "&elmao"
 # Back to XPhar
 command /smite [<player>]:
 	permission: smite.use
@@ -166,7 +200,7 @@ command /smite [<player>]:
 			send "{@pf} &8Smited!"
 			strike lightning at the player
 		if arg 1 is set:
-			send "{@pf} &8Smited!"
+			send "{@pf} &8Smited %arg 1%&8!"
 			strike lightning at arg 1
 # Broadcasting Commands
 command /broadcast [<text>]:
@@ -243,6 +277,13 @@ command /help [<text>]:
 				send "&7/cc = Clear the Chat."
 				send "&7/mc = Mute the Chat."
 				send "&7&m-------------&r&8[&cPage4&8]&7&m-------------"
+			if arg 1 is "secret":
+				send "&7&m-------------&r&8[&c&lXPhar&8]&7&m-------------"
+				send "&7/xphar flex = Flex on other players"
+				send "&7/xphar sniff = uwu"
+				send "&7/xphar renegade = Do the Renegade!"
+				send "&7/xphar oof = OOF"
+				send "&7&m-------------&r&8[&cSecret&8]&7&m-------------"
 command /mutechat:
     permission: chat.mute
     permission message: {@noperm}
@@ -271,5 +312,5 @@ command /clearchat:
         loop 300 times:
             broadcast ""
         wait 1 tick
-        broadcast "&aThe chat has been cleared by &2%player%"
+        broadcast "&bThe chat has been cleared by &9%player%"
         stop
