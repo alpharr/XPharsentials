@@ -3,7 +3,7 @@ options:
 	pf: &c&lXPhar &4»
 	pf2: &c&lXPhar &4>>
 	noperm: &c&lXPhar &c» &cYou don't have permission to execute this command.
-	ver: &aVersion 1.0
+	ver: &aVersion 1.1
 # XPharsentials >> Made by Alphar
 # XPharsentials >> 28/03/2020
 command /xphar [<text>]:
@@ -287,6 +287,7 @@ command /help [<text>]:
 command /mutechat:
     permission: chat.mute
     permission message: {@noperm}
+	aliases: /mc
     trigger:
         if {Globalchat} is not set:
             set {Globalchat} to true
