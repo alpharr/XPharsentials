@@ -3,13 +3,13 @@ options:
 	pf: &c&lXPhar &4»
 	pf2: &c&lXPhar &4>>
 	noperm: &c&lXPhar &c» &cYou don't have permission to execute this command.
-	ver: &aVersion 1.1
+	ver: &aVersion 1.2 PRE
 # XPharsentials >> Made by Alphar
 # XPharsentials >> 28/03/2020
 command /xphar [<text>]:
 	trigger:
 		if arg 1 is not set:
-			send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.1"
+			send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.2 PRE"
 		if arg 1 is set:
 			if arg 1 is "help":
 				send "&7&oOpening Help Page."
