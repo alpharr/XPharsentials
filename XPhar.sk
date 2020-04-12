@@ -1,4 +1,7 @@
 # XPharsentials
+variables:
+	{godMode.%player%} = false
+
 options:
 	pf: &c&lXPhar &4»
 	pf2: &c&lXPhar &4>>
@@ -9,11 +12,14 @@ options:
 command /xphar [<text>]:
 	trigger:
 		if arg 1 is not set:
-			send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.2 PRE"
+			send "&c&lXPharsentials &4>> &aMade by Alphar, Version 1.2"
 		if arg 1 is set:
+			if arg 1 is not "help" or "when" or "flex" or "sniff" or "renegade" or "oof" or "release":
+				send "{@pf} &7&oInvalid Syntax! (/xphar help)"
 			if arg 1 is "help":
-				send "&7&oOpening Help Page."
-				make player execute "/help"
+				send "{@pf} &7&o/xphar <help|release>"
+			if arg 1 is "release":
+				send "{@pf} &c&l&oXPhar &r&7&owas first released in 05/04/2020 (dd/mm/yy)."
 			if arg 1 is "when":
 				send "{@pf} &7&oLooks like you found the Secret huh."
 				send "{@pf} &7&oWell, the next release is coming soon enough."
@@ -27,35 +33,43 @@ command /xphar [<text>]:
 				broadcast "&cSuch a great dancer!"
 			if arg 1 is "oof":
 				broadcast "&e%player% &ejust OOF'ed!"
-command /gmc:
+command /gmc [<player>]:
 	permission: gmc.use
 	permission message: {@noperm}
 	description: Set your gamemode to creative.
 	trigger:
-		set the player's gamemode to creative
-		send "{@pf} &8Gamemode set to Creative."
-command /gms:
+		if arg 1 is not set:
+			set the player's gamemode to creative
+			send "{@pf} &7&oGamemode set to Creative."
+		if arg 1 is set:
+			set arg 1's gamemode to creative
+			send "{@pf} &7&oSet %arg 1% &7&ogamemode to Creative."
+command /gms [<player>]:
 	permission: gms.use
 	permission message: {@noperm}
 	description: Set your gamemode to survival.
 	trigger:
-		set the player's gamemode to survival
-		send "{@pf} &8Gamemode set to Survival."
+		if arg 1 is not set:
+			set the player's gamemode to survival
+			send "{@pf} &7Gamemode set to Survival."
+		if arg 1 is set:
+			set arg 1's gamemode to survival
+			send "{@pf} &7&oSet %arg 1% &7&ogamemode to Survival."
 command /tp <player>:
 	permission: tp.use
 	permission message: {@noperm}
 	description: Tp to someone.
 	trigger:
 		teleport player to arg 1
-		send "{@pf} &8TP'ed to %arg 1%"
+		send "{@pf} &7&oTP'ed to %arg 1%"
 command /tphere <player>:
 	permission: tphere.use
 	permission message: {@noperm}
 	description: Tp someone to you.
 	trigger:
 		teleport arg-1 to player
-		send "{@pf} &8TP'ed %arg 1% &8to you."
-		send "{@pf} &8%player% TP'ed you to him." to arg 1
+		send "{@pf} &7&oTP'ed %arg 1% &7&oto you."
+		send "{@pf} &7&o%player% &7&oTP'ed you to him." to arg 1
 command /pl [<text>]:
 	trigger:
 		send "&cHaha you thought :) - Disabled by XPharsentials"
@@ -68,18 +82,30 @@ command /bukkit:pl [<text>]:
 command /bukkit:plugins [<text>]:
 	trigger:
 		send "&cHaha you thought :) - Disabled by XPharsentials"
-command /fly [<text>]:
+command /fly [<player>]:
 	permission: fly.use
 	permission message: {@noperm}
 	trigger:
-		if player's flight mode is false:
-			set player's flight mode to true
-			send "{@pf} &8You can now fly."
-			stop
-		if player's flight mode is true:
-			set player's flight mode to false
-			send "{@pf} &8You cannot fly now :("
-			stop
+		if arg 1 is not set:
+			if player's flight mode is false:
+				set player's flight mode to true
+				send "{@pf} &7&oYou can now fly."
+				stop
+			if player's flight mode is true:
+				set player's flight mode to false
+				send "{@pf} &7&oYou cannot fly now :("
+				stop
+		if arg 1 is set:
+			if arg 1's flight mode is false:
+				set arg 1's flight mode to true
+				send "{@pf} &7&o%arg 1% &7&ocan now fly."
+				send "{@pf} &7&oYou can now fly." to arg 1
+				stop
+			if arg 1's flight mode is true:
+				set  arg 1's flight mode to false
+				send "{@pf} &7&o%arg 1% &7&ocan't fly anymore."
+				send "{@pf} &7&oYou can't fly now." to arg 1
+				stop
 # ---> may need to add stop ^^ not sure.
 command /ping [<text>]:
 	trigger:
@@ -94,41 +120,41 @@ command /ping [<text>]:
 #	permission message: {@noperm}
 #	trigger:
 #		Set the player's display name to "**%arg 1%"
-#		send "{@pf} &8Nickname changed."
+#		send "{@pf} &7&oNickname changed."
 #command /unnick:
 #	permission: nick.use
 #	permission message: {@noperm}
 #	trigger:
 #		Set the player's display name "%player%""
-#		send "{@pf} &8Disabled your Nickname."
+#		send "{@pf} &7&oDisabled your Nickname."
 command /heal [<player>]:
 	permission: heal.use
 	permission message: {@noperm}
 	trigger:
 		if arg 1 is not set:
 			heal the player
-			send "{@pf} &8You have been healed."
+			send "{@pf} &7&oYou have been healed."
 		if arg 1 is set:
 			heal arg 1
-			send "{@pf} &8Healed %arg 1%."
+			send "{@pf} &7&oHealed %arg 1%."
 command /repair:
 	permission: repair.use
 	permission message: {@noperm}
 	trigger:
 		repair tool of player
-		send "{@pf} &8Tool Repaired."
+		send "{@pf} &7&oTool Repaired."
 command /abuse [<text>]:
 	permission: abuse.use
 	permission message: {@noperm}
 	trigger:
 		enchant the player's tool with sharpness 1000
-		send "{@pf} &8Enchanted tool with sharpness 1000. Try not to get banned."
+		send "{@pf} &7&oEnchanted tool with sharpness 1000. Try not to get banned."
 #command /disenchant [<text>]:
 #	permission: disenchant.use
 #	permission message: {@noperm}
 #	trigger:
 #	    disenchant the player's tool # this is somehow not working
-#	    send "{@pf} Removed Tool's enchants" # this is somehow not working
+#	    send "{@pf} &7&oRemoved Tool's enchants" # this is somehow not working
 # Moderation Commands, Not too good.
 command /kick [<offline player>] [<text>]:
     permission: kick.use
@@ -197,10 +223,10 @@ command /smite [<player>]:
 	permission message: {@noperm}
 	trigger:
 		if arg 1 is not set:
-			send "{@pf} &8Smited!"
+			send "{@pf} &7&oSmited!"
 			strike lightning at the player
 		if arg 1 is set:
-			send "{@pf} &8Smited %arg 1%&8!"
+			send "{@pf} &7&oSmited %arg 1%&7&o!"
 			strike lightning at arg 1
 # Broadcasting Commands
 command /broadcast [<text>]:
@@ -222,7 +248,7 @@ command /bc [<text>]:
 	description: Broadcast your Message!
 	trigger:
 		if arg 1 is not set:
-			send "{@pf} &8&oYou must say a message to broadcast!"
+			send "{@pf} &7&oYou must say a message to broadcast!"
 		if arg 1 is set:
 			broadcast "&l"
 			broadcast "&l"
@@ -235,7 +261,7 @@ command /alert [<text>]:
 	description: Broadcast your Message!
 	trigger:
 		if arg 1 is not set:
-			send "{@pf} &8&oYou must say a message to broadcast!"
+			send "{@pf} &7&oYou must say a message to broadcast!"
 		if arg 1 is set:
 			broadcast "&l"
 			broadcast "&l"
@@ -352,3 +378,32 @@ command /online [<text>]:
 	permission message: &cYou aren't allowed to execute this command.
 	trigger:
 		send "&aThere are %number of all players% players online!"
+command /god [<player>]:
+	permission: god.use
+	permission message: {@noperm}
+	trigger:
+		if arg 1 is not set:
+			if {godMode.%player%} is false:
+				send "{@pf} &7&oGod Mode enabled."
+				set {godMode.%player%} to true
+				stop
+			if {godMode.%player%} is true:
+				send "{@pf} &7&oGod Mode disabled."
+				set {godMode.%player%} to true
+				stop
+		if arg 1 is set:
+			if {godMode.%arg 1%} is false:
+				send "{@pf} &7&oGod Mode enabled for %arg 1%."
+				send "{@pf} &7&oGod Mode enabled." to arg 1
+				set {godMode.%arg 1%} to true
+				stop
+			if {godMode.%arg 1%} is true:
+				send "{@pf} &7&oGod Mode disabled for %arg 1%."
+				send "{@pf} &7&oGod Mode disabled." to arg 1
+				set {godMode.%arg 1%} to false
+				stop
+on damage:
+	if {godMode.%victim%} is true:
+		cancel event
+	if {godMode.%victim%} is false:
+		stop
